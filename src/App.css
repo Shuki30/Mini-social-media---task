@@ -21,6 +21,16 @@ body{
   background-color:#141414;
 }
 
+.heart{
+  color:red;
+}
+
+.no-border{
+  border: 0;
+  margin:0;
+  padding:0; 
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
