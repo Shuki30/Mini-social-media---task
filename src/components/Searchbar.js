@@ -105,6 +105,7 @@ export class Searchbar extends Component {
             onChange={onChange}
             onKeyDown={onKeyDown}
             value={userInput}
+            placeholder="Search"
           />
           <input type="submit" value="" className="search-btn" />
                   {optionList}
