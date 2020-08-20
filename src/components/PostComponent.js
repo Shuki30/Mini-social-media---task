@@ -1,15 +1,27 @@
 import React , {useState } from 'react';
 import {
-  Card, CardImg, CardText, CardBody,Media,Button,Form, FormGroup, Label, Input,Col
+  Card, CardImg, CardText, CardBody,Media,Button,Form, FormGroup,Input,Col
 } from 'reactstrap';
+import {USERS} from '../shared/users';
 
-function Renderpost({post}) {
+function Renderpost({post,Comments}) {
 
   const [like, setLike] = useState(true);
   const [comment,setComment] = useState(false);
 
+  var users = USERS;
+  console.log(users);
+  var post_user;
+
+  for(var i=0; i < users.length ; i++){
+      if(users[i].id === post.userid){
+        post_user = users[i].username;
+      }
+  }
+
   function like_toggle() {
     setLike(!like);
+    console.log("like");
   }
 
   function comment_toggle(){
@@ -22,7 +34,7 @@ function Renderpost({post}) {
       <p><u>Comments</u></p>
       {comments.map(comment => {
         return (
-          <p><span className="caption_usr">{comment.name}</span> &nbsp; {comment.comment}</p>
+          <p><span className="caption_usr">{comment.username}</span> &nbsp; {comment.comment}</p>
         );
       })}
       </div>
@@ -37,7 +49,7 @@ function Renderpost({post}) {
         </Media>
         <Media body>
           <p className="username">
-            {post.username}
+            {post_user}
           </p>
         </Media>
       </Media>
@@ -52,14 +64,14 @@ function Renderpost({post}) {
         <span className="fa fa-comment fa-2x"></span>
         </Button>
         <CardText><br></br><span className="caption_usr">{post.username}</span> &nbsp;&nbsp;{post.caption}</CardText>
-        {comment? <Rendercomments comments={post.comments}/>:<div></div>}
+        {comment? <Rendercomments comments={Comments}/>:<div></div>}
       </CardBody>
       <Form className="comment_form">
         <FormGroup row>
-          <Col sm={11} className="comment_input">
+          <Col sm={10} className="comment_input">
             <Input type="comment" name="comment" placeholder="Add a comment.." className="no_border_radius"/>
           </Col>
-          <Col sm={1} className="comment_submit">
+          <Col sm={2} className="comment_submit">
             <Button className="no_border_radius">Post</Button>
           </Col>
         </FormGroup>
@@ -68,21 +80,4 @@ function Renderpost({post}) {
   );
 }
 
-const Post = (props) => {
-
-  const allposts = props.posts.map((post) => {
-    return (
-        <div className="container">
-        <Renderpost post={post}/>
-        </div>
-    );
-  });
-
-  return (
-    <div>
-      {allposts}
-    </div>
-  );
-};
-
-export default Post;
+export default Renderpost;

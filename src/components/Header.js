@@ -4,7 +4,7 @@ import {faInstagram} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from 'react-router-dom';
 import Searchbar from './Searchbar';
-import {usernames} from '../shared/usernames';
+import {USERS} from '../shared/users';
 
 class Header extends Component {
     constructor(props) {
@@ -13,6 +13,7 @@ class Header extends Component {
         this.toggleNav = this.toggleNav.bind(this);
         this.state = {
           isNavOpen: false,
+          users:USERS
         };
       }
 
@@ -23,6 +24,12 @@ class Header extends Component {
       }
 
 render() {
+
+var username=[];
+for (var i=0;i< (this.state.users.length); i++){
+    username[i]=this.state.users[i].username;
+}
+
   return(
     <div>
       <Navbar dark color="dark" expand="md" >
@@ -32,22 +39,25 @@ render() {
               Instagram
             </NavbarBrand>
           </div>
-          <div className="col-md-4 col-sm-5 cols">
-            <Searchbar  options={usernames}/>
+          <NavbarToggler onClick={this.toggleNav} className="col-sm-6"/>
+          <Collapse isOpen={this.state.isNavOpen} navbar className="cols">
+          <div className="col-md-6 col-sm-5 cols">
+                <Searchbar  options={username}/>
           </div>
-          <div className="col-md-4 col-sm-2">
-            <NavbarToggler onClick={this.toggleNav}/>
-            <Collapse isOpen={this.state.isNavOpen} navbar className="cols">
+          <div className="col-md-6 col-sm-2">
             <Nav navbar>
+
               <NavItem>
-                  <NavLink className="nav-link"  to='/'><span className="fa fa-home fa-lg ml-4 mr-2"></span></NavLink>
+                  <NavLink className="nav-link"  to='/home'><span className="fa fa-home fa-lg ml-4 mr-2"></span></NavLink>
               </NavItem>
+
               <NavItem>
-                  <NavLink className="nav-link"  to='/'><span className="fa fa-user-circle fa-lg ml-4 mr-2"></span></NavLink>
+                  <NavLink className="nav-link"  to='/profile'><span className="fa fa-user-circle fa-lg ml-4 mr-2"></span></NavLink>
               </NavItem>
+
             </Nav>
-            </Collapse>
           </div>
+          </Collapse>
       </Navbar>
     </div>
   );

@@ -91,7 +91,6 @@ export class Searchbar extends Component {
       } else {
         optionList = (
           <div className="no-options">
-            <em>No Option!</em>
           </div>
         );
       }
