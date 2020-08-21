@@ -42,7 +42,7 @@ for (var i=0;i< (this.state.users.length); i++){
           <NavbarToggler onClick={this.toggleNav} className="col-sm-6"/>
           <Collapse isOpen={this.state.isNavOpen} navbar className="cols">
           <div className="col-md-6 col-sm-5 cols">
-                <Searchbar  options={username}/>
+                <Searchbar  options={username} users={this.state.users}/>
           </div>
           <div className="col-md-6 col-sm-2">
             <Nav navbar>
@@ -52,7 +52,7 @@ for (var i=0;i< (this.state.users.length); i++){
               </NavItem>
 
               <NavItem>
-                  <NavLink className="nav-link"  to='/profile'><span className="fa fa-user-circle fa-lg ml-4 mr-2"></span></NavLink>
+                  <NavLink className="nav-link" to={`/profile/${this.state.users[0].id}`}><span className="fa fa-user-circle fa-lg ml-4 mr-2"></span></NavLink>
               </NavItem>
 
             </Nav>

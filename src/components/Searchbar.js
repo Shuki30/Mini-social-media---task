@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 export class Searchbar extends Component {
   static propTypes = {
@@ -9,8 +10,22 @@ export class Searchbar extends Component {
     activeOption: 0,
     filteredOptions: [],
     showOptions: false,
-    userInput: ''
+    userInput: '',
+    redirect:false,
+    userid:0
   };
+
+  redirectHandler = () => {
+    this.setState({ redirect: true })
+    this.renderRedirect();
+}
+
+renderRedirect = (userid) => {
+    if (this.state.redirect) {
+        return <Redirect to={`/profile/${userid}`} />
+    }
+}
+
 
   onChange = (e) => {
     console.log('onChanges');
@@ -32,12 +47,19 @@ export class Searchbar extends Component {
   };
 
   onClick = (e) => {
+    var user=this.props.users.filter((user) => user.username.toString() === e.currentTarget.innerText.toString())[0];
+    console.log(user.id);
+
     this.setState({
       activeOption: 0,
       filteredOptions: [],
       showOptions: false,
-      userInput: e.currentTarget.innerText
+      userInput: e.currentTarget.innerText,
+      userid : user.id
     });
+
+    this.redirectHandler();
+
   };
   onKeyDown = (e) => {
     const { activeOption, filteredOptions } = this.state;
@@ -108,6 +130,7 @@ export class Searchbar extends Component {
           />
           <input type="submit" value="" className="search-btn" />
                   {optionList}
+                  {this.renderRedirect(this.state.userid)}
         </div>
       </React.Fragment>
     );

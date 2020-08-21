@@ -63,7 +63,7 @@ function Renderpost({post,Comments}) {
         <Button className="no-border" outline onClick={comment_toggle}>
         <span className="fa fa-comment fa-2x"></span>
         </Button>
-        <CardText><br></br><span className="caption_usr">{post.username}</span> &nbsp;&nbsp;{post.caption}</CardText>
+        <CardText><br></br><span className="caption_usr">{post_user}</span> &nbsp;&nbsp;{post.caption}</CardText>
         {comment? <Rendercomments comments={Comments}/>:<div></div>}
       </CardBody>
       <Form className="comment_form">

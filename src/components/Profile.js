@@ -2,18 +2,19 @@
 import React from 'react';
 import Renderphoto from './PhotoComponent';
 import Renderdetail from './Profile_details';
-import {USERS} from '../shared/users';
 import {Button} from 'reactstrap';
 
 const Profile = (props) => {
 
-  const allposts = props.posts.map((post) => {
+  var user = props.user;
+  var posts = props.posts.filter( post => post.userid.toString() === (user.id.toString()) );
+  console.log(posts);
+  const allposts = posts.map((post) => {
     return (
           <Renderphoto post={post}/>
     );
   });
 
-  var user = USERS[0];
 
   return (
       <div>
