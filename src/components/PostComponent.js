@@ -12,10 +12,12 @@ function Renderpost({post,Comments}) {
   var users = USERS;
   console.log(users);
   var post_user;
+  var user_dp;
 
   for(var i=0; i < users.length ; i++){
       if(users[i].id === post.userid){
         post_user = users[i].username;
+        user_dp = users[i].dp;
       }
   }
 
@@ -45,7 +47,7 @@ function Renderpost({post,Comments}) {
     <Card className="card">
       <Media>
         <Media left top href="#">
-          <img src={post.dp} className="propic" alt="propic" />
+          <img src={user_dp} className="propic" alt="propic" />
         </Media>
         <Media body>
           <p className="username">
